@@ -1,3 +1,5 @@
+# https://chaim-zalmy-muskal.medium.com/write-your-own-macros-and-create-your-own-gems-in-ruby-999b44186f25
+
 class Student
 
   #attr_reader :name, :age # macro for generating a getter method

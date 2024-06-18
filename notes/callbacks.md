@@ -96,7 +96,6 @@ Actions that trigger it: :destroy
 
 ## after_find
 
-
 ## after_upsert 
 ## around_upsert
 ## before_upsert  
