@@ -1,0 +1,57 @@
+[root] before
+[root] around (before)
+[child #1] before
+[child #1] around (before)
+[grand-child #1] before
+[grand-child #1] around (before)
+[grand-child #2] before
+[grand-child #2] around (before)
+[grand-child #3] before
+[grand-child #3] around (before)
+[child #2] before
+[child #2] around (before)
+[grand-child #4] before
+[grand-child #4] around (before)
+[grand-child #5] before
+[grand-child #5] around (before)
+[child #3] before
+[child #3] around (before)
+[child #4] before
+[child #4] around (before)
+[grand-child #6] before
+[grand-child #6] around (before)
+[grand-child #7] before
+[grand-child #7] around (before)
+[grand-child #8] before
+[grand-child #8] around (before)
+[great-grand-child #1] before
+[great-grand-child #1] around (before)
+[root] *** doing the thing! ***
+[great-grand-child #1] after
+[great-grand-child #1] around (after)
+[grand-child #8] after
+[grand-child #8] around (after)
+[grand-child #7] after
+[grand-child #7] around (after)
+[grand-child #6] after
+[grand-child #6] around (after)
+[child #4] after
+[child #4] around (after)
+[child #3] after
+[child #3] around (after)
+[grand-child #5] after
+[grand-child #5] around (after)
+[grand-child #4] after
+[grand-child #4] around (after)
+[child #2] after
+[child #2] around (after)
+[grand-child #3] after
+[grand-child #3] around (after)
+[grand-child #2] after
+[grand-child #2] around (after)
+[grand-child #1] after
+[grand-child #1] around (after)
+[child #1] after
+[child #1] around (after)
+[root] after
+[root] around (after)

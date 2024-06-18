@@ -95,8 +95,9 @@ def invoke_with_callbacks(instance)
 end
 ```
 * ```realized_callbacks = collect_callback_tree(instance)``` <br />
-realized_callbacks is a list of Ruby fibers where each fiber corresponds to one of :before, :around, :after depending on what is defined for each document. 
+realized_callbacks is a list of Ruby fibers where each fiber corresponds to one of :before, :around, :after depending on what is defined for each document. This gathers all callback 'Fiber' objects for the given 'instance' and its children recursively. This method ensures all callbacks (`before`, `around`, `after`) are prepared and stored in the correct execution order. 
 
+yield in Ruby is a special keyword that allows passing control from a method to a block of code passed to it.
 ### private methods: 
 
 #### def collect_callback_tree(instance, list: [])
@@ -136,10 +137,30 @@ This block of code is returned
  Specifically, it returns a block that returns a fiber. It doesn't run the block. It simply encapsulates and returns it. 
 
 #### def before_callback_for(instance, callback)
-
+```ruby 
+  # Returns a fiber that invokes the callback the first time the fiber is resumed
+  # (returning the callback's return value), and returns nil the second time.
+  def before_callback_for(instance, callback)
+    Fiber.new { Fiber.yield instance.send(callback); nil }
+  end
+```
 #### def around_callback_for(instance, callback)
-
+```ruby
+  # Returns a fiber that invokes the callback the first time the fiber is resumed,
+  # pausing when the callback yields, and resumes from the yield when the fiber is
+  # resumed the second time.
+  def around_callback_for(instance, callback)
+    Fiber.new { instance.send(callback) { Fiber.yield }; nil }
+  end
+```
+{ Fiber.yield } is a block passed into instance.send(callback) [in this case, the callback is :around and the instance is the document the callbacks are executing on]. When yield is called inside the around function, { Fiber.yield } is executed and control exits around_callback_for to invoke_with_callbacks. When this fiber is resumed, it resumes from the yield inside around
 #### def after_callback_for(instance, callback)
+```ruby
+  # Returns a fiber that returns nil the first time it is resumed, and invokes the callback the second time it is resumed.
+  def after_callback_for(instance, callback)
+    Fiber.new { Fiber.yield; instance.send(callback) }
+  end
 
+```
 
 
