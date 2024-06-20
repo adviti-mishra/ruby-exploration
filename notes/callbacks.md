@@ -14,6 +14,24 @@ validate -> save -> create
 7. after_create
 8. after_save
 
+### The following operations trigger callbacks:
+1. create
+2. create!
+3. destroy
+4. destroy!
+5. destroy_all
+6. destroy_by
+7. save
+8. save!
+9. save(validate: false)
+10. save!(validate: false)
+11. toggle!
+12. touch
+13. update_attribute
+14. update
+15. update!
+16. valid?
+
 ### Updating an object 
 validate -> save -> update
 
